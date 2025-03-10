@@ -570,7 +570,7 @@ impl completion::CompletionModel for CompletionModel {
             .iter()
             .any(|content| matches!(content, Content::Text { text } if !text.is_empty()));
 
-        if !has_non_empty_text {
+        if has_non_empty_text {
             messages.push(prompt_message);
         }
 
