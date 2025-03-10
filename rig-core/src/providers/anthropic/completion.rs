@@ -565,7 +565,9 @@ impl completion::CompletionModel for CompletionModel {
             })
             .collect::<Result<Vec<Message>, _>>()?;
 
-        messages.push(prompt_message);
+        if !prompt_message.content.is_empty() {
+            messages.push(prompt_message);
+        }
 
         let mut request = json!({
             "model": self.model,
