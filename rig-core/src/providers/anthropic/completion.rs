@@ -565,7 +565,12 @@ impl completion::CompletionModel for CompletionModel {
             })
             .collect::<Result<Vec<Message>, _>>()?;
 
-        if !prompt_message.content.is_empty() {
+        let has_non_empty_text = prompt_message
+            .content
+            .iter()
+            .any(|content| matches!(content, Content::Text { text } if !text.is_empty()));
+
+        if !has_non_empty_text {
             messages.push(prompt_message);
         }
 
